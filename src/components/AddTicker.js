@@ -13,7 +13,6 @@ const AddTicker = ({ onAdd }) => {
             alert('please fill in the empty inputs');
             return;
         }
-        console.log(ticker);
         onAdd({ ticker });
         setTicker('');
     };

@@ -8,42 +8,11 @@ import AddTicker from "./components/AddTicker";
 function App() {
     let id = 0;
     const [showTask, setShowTask] = useState(false);
-    const [tickers, setTickers] = useState([
-        {
-            id: "bitcoin",
-            name: "Bitcoin",
-            symbol: "BTC",
-            price_usd: "1",
-            percent_change_1h: "0",
-            percent_change_24h: "0",
-            percent_change_7d: "0",
-        },
-        {
-            id: "ethereum",
-            name: "Ethereum",
-            symbol: "ETH",
-            price_usd: "1",
-            percent_change_1h: "0",
-            percent_change_24h: "0",
-            percent_change_7d: "0",
-        },
-        {
-            id: "litecoin",
-            name: "Litecoin",
-            symbol: "LTC",
-            price_usd: "1",
-            percent_change_1h: "0",
-            percent_change_24h: "0",
-            percent_change_7d: "0",
-        }
-    ]
-    )
+    const [tickers, setTickers] = useState("");
 
     const [loading, setLoading] = useState(true);
 
-    const [symbols, setSymbols]  = useState([
-        "etc", "btc", "ltc"
-    ])
+    const [symbols, setSymbols]  = useState(["etc", "btc", "ltc"])
 
     function saveData(){
         var save = symbols;
@@ -75,11 +44,10 @@ function App() {
     }
 
     useEffect(() => {
-        if (loading) {
+        /*if (loading) {
             loadData();
-        }
+        }*/
         fetchData();
-        saveData();
     });
 
 
