@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 
 function Tickers({ tickers, onDelete, id }) {
     return (
-        <Row>
+        <Row className="justify-content-center">
             {tickers.map((ticker) => (
                 <Ticker key={ticker.symbol} 
                 ticker={ticker} 

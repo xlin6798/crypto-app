@@ -1,10 +1,7 @@
-import Button from "react-bootstrap/Button";
-
-function Header({ title, onAdd }) {
+function Header({ title }) {
     return (
-        <header className="header">
-            <h3 className="text-center"> {title} </h3>
-            <Button variant="primary" onClick={onAdd}> Add </Button>
+        <header className="header bg-dark text-light p-4">
+            <h2 className="display-1 text-center"> {title} </h2>
         </header>
     );
 }

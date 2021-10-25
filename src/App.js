@@ -1,32 +1,37 @@
-import Tickers from "./components/Tickers";
-import Container from "react-bootstrap/Container";
 import Header from "./components/Header";
+import Tickers from "./components/Tickers";
+import AddTicker from "./components/AddTicker";
+import Footer from "./components/Footer";
+import Container from "react-bootstrap/Container";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AddTicker from "./components/AddTicker";
+
 
 function App() {
     let id = 0;
-    const [showTask, setShowTask] = useState(false);
-    const [tickers, setTickers] = useState("");
 
-    const [loading, setLoading] = useState(true);
+    const [tickers, setTickers] = useState(
+        [
+            {
+                id: "bitcoin",
+                name: "Bitcoin",
+                symbol: "BTC",
+                price_usd: "1",
+                percent_change_1h: "0",
+                percent_change_24h: "0",
+                percent_change_7d: "0",
+            },
+        ]
+    );
 
-    const [symbols, setSymbols]  = useState(["etc", "btc", "ltc"])
+    const [symbols, setSymbols] = useState(
+        (JSON.parse(localStorage.getItem("save")) !== null && JSON.parse(localStorage.getItem("save")) !== undefined)
+            ? JSON.parse(localStorage.getItem("save"))
+            : ["etc", "btc", "ltc", "usdt", "ada", "bnb", "xrp", "sol", "usd", "dot"]
+    );
 
-    function saveData(){
-        var save = symbols;
-        localStorage.setItem("save", JSON.stringify(save));
-    }
-
-    function loadData(){
-        setLoading(false);
-        var save = JSON.parse(localStorage.getItem("save"));
-        if (save !== null && save !== undefined)
-            setSymbols(save);
-    }
     function addTicker(symbol) {
-        setSymbols(symbols.concat(symbol.ticker));
+        setSymbols(symbols.concat(symbol.ticker.toLowerCase()));
     }
 
     function deleteTicker(symbol) {
@@ -44,25 +49,27 @@ function App() {
     }
 
     useEffect(() => {
-        /*if (loading) {
-            loadData();
-        }*/
         fetchData();
+        localStorage.setItem("save", JSON.stringify(symbols));
     });
 
 
-    const title = "Crypto";
+    const title = "Crypto Tracker App";
 
     return (
-        <Container className="align-content-center">
-            <Header onAdd={() => setShowTask(!showTask)}  title={title} />
-            {showTask && <AddTicker onAdd={addTicker} />}
-            {symbols.length > 0 ? (
-                <Tickers onDelete={deleteTicker} id={id} tickers={tickers} />
-            ) : (
-                'No crypto to show'
-            )}
-        </Container>
+        <>
+            <Header title={title} />
+            <AddTicker onAdd={addTicker}></AddTicker>
+            <Container className="align-content-center pt-5">
+                {symbols.length > 0 ? (
+                    <Tickers onDelete={deleteTicker} id={id} tickers={tickers} />
+                ) : (
+                    'No crypto to show'
+                )}
+            </Container>
+            <Footer />
+        </>
+
     );
 }
 
