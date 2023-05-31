@@ -44,7 +44,14 @@ npm start
 
 This will launch the web app in your default browser. You can now begin exploring and interacting with the application.
 
-## Known Limitations
+## Technology Stack
+
+The Crypto Tracker Web App is built using the following technologies:
+
+- React: JavaScript framework for building user interfaces.
+- CoinGecko API: External API for fetching cryptocurrency data.
+
+## Limitations
 
 - User login functionality is not currently supported. The app does not require user authentication to access its features.
 - The app does not utilize a database. All data is fetched from the CoinGecko API in real-time.
